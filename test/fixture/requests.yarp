@@ -1,0 +1,7 @@
+package io.libyarp;
+
+# This is some documentation
+# for the RandomBytesRequest message type
+message RandomBytesRequest {
+    desired_length int8 = 0; # Fields indexes begin at zero.
+}

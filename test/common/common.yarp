@@ -1,0 +1,6 @@
+package io.yarp.common;
+
+message Notification {
+    title string = 0;
+    body  string = 1;
+}

@@ -1,0 +1,5 @@
+package io.libyarp;
+
+message RandomBytesResponse {
+    @repeated data uint8 = 0;
+}

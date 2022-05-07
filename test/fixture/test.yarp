@@ -1,0 +1,11 @@
+package io.libyarp;
+
+import "./requests";
+import "./responses";
+import "../common/common";
+
+service RandomBytesService {
+    generate_random_bytes(RandomBytesRequest) -> RandomBytesResponse;
+    generate_random_notification() -> io.libyarp.common.Notification;
+    receive_random_notification(io.libyarp.common.Notification);
+}
