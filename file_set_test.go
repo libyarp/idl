@@ -11,5 +11,4 @@ func TestFileSet(t *testing.T) {
 	err := fs.Load("./test/fixture/test.yarp")
 	require.NoError(t, err)
 	fmt.Printf("%#v\n", fs)
-	fmt.Printf("%#v\n", fs)
 }

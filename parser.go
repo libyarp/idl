@@ -556,8 +556,8 @@ func (p *parser) parseIndex() (int, error) {
 }
 
 func (p *parser) flushMeta() {
-	p.comments = p.comments[:0]
-	p.annotations = p.annotations[:0]
+	p.comments = []string{}
+	p.annotations = AnnotationCollection{}
 }
 
 func (p *parser) service() error {
