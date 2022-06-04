@@ -96,6 +96,13 @@ func tStruct(typ string) func(*testing.T, Field) {
 		assert.Equal(t, typ, f.Type.(Unresolved).Name)
 	}
 }
+func tMap(k, v interface{}) func(*testing.T, Field) {
+	return func(t *testing.T, f Field) {
+		assert.Equal(t, TypeMap, f.Type.Type())
+		assert.Equal(t, k, f.Type.(Map).Key)
+		assert.Equal(t, v, f.Type.(Map).Value)
+	}
+}
 
 func assertMethod(t *testing.T, m Method, assertions ...func(t *testing.T, m Method)) {
 	for _, fn := range assertions {
@@ -159,6 +166,7 @@ func TestParserDocsExample(t *testing.T) {
 		assertField(t, vv.Fields[2], name("surname"), tString())
 		assertField(t, vv.Fields[3], name("company"), optional(), tStruct("Company"))
 		assertField(t, vv.Fields[4], name("emails"), repeat(), tString())
+		assertField(t, vv.Fields[5], name("social_networks"), tMap(String, Primitive{Kind: String}))
 	})
 
 	t.Run("Company", func(t *testing.T) {
@@ -185,7 +193,7 @@ func TestParserDocsExample(t *testing.T) {
 		require.IsType(t, Message{}, v)
 		vv := v.(Message)
 		assert.Equal(t, "GetContactResponse", vv.Name)
-		assert.Equal(t, "GetContactResposne represents the result of a GetContactRequest. An absent `contact` indicates that no contact under the provided id exists.", joinComments(vv.Comments))
+		assert.Equal(t, "GetContactResponse represents the result of a GetContactRequest. An absent `contact` indicates that no contact under the provided id exists.", joinComments(vv.Comments))
 		assertField(t, vv.Fields[0], name("contact"), tStruct("Contact"), optional())
 	})
 

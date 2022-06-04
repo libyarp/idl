@@ -489,6 +489,10 @@ func (p *parser) parseType() (Type, error) {
 }
 
 func (p *parser) parseMapType() (Type, error) {
+	if !p.tokens.peek().is(OpenAngled) {
+		return nil, p.tokens.error("expected '<")
+	}
+	p.tokens.advance()
 	k, err := p.parseMapKey()
 	if err != nil {
 		return nil, err
